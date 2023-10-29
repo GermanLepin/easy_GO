@@ -32,8 +32,8 @@ func main() {
 		}()
 		fmt.Println("Goroutines\t\t", runtime.NumGoroutine())
 	}
-
 	wg.Wait()
+
 	fmt.Println("Goroutines\t\t", runtime.NumGoroutine())
 	fmt.Println("count:", counter)
 }

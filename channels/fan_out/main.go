@@ -12,7 +12,6 @@ func main() {
 	c2 := make(chan int)
 
 	go populate(c1)
-
 	go fanOutIn(c1, c2)
 
 	for v := range c2 {
@@ -31,6 +30,7 @@ func populate(c chan int) {
 
 func fanOutIn(c1, c2 chan int) {
 	var wg sync.WaitGroup
+
 	for v := range c1 {
 		wg.Add(1)
 		go func(v2 int) {
@@ -39,6 +39,7 @@ func fanOutIn(c1, c2 chan int) {
 		}(v)
 	}
 	wg.Wait()
+
 	close(c2)
 }
 
