@@ -26,7 +26,6 @@ func main() {
 func (a *agent) sender(chan1, chan2 chan<- int) {
 	defer close(chan1)
 	defer close(chan2)
-	defer a.wg.Done()
 
 	for i := 0; i < 100; i++ {
 		if i%2 == 0 {
@@ -35,11 +34,11 @@ func (a *agent) sender(chan1, chan2 chan<- int) {
 			chan2 <- i
 		}
 	}
+	a.wg.Done()
 }
 
 func (a *agent) reciver(chan1, chan2 <-chan int, chan3 chan<- int) {
 	defer close(chan3)
-	defer a.wg.Done()
 
 	var wg sync.WaitGroup
 
@@ -57,8 +56,9 @@ func (a *agent) reciver(chan1, chan2 <-chan int, chan3 chan<- int) {
 		}
 		wg.Done()
 	}()
-
 	wg.Wait()
+
+	a.wg.Done()
 }
 
 type agent struct {

@@ -42,8 +42,8 @@ func main() {
 				}
 			}()
 		}
-
 		wg.Wait()
+
 		close(chan2)
 	}()
 

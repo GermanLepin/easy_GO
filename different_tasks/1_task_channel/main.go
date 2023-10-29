@@ -6,19 +6,18 @@ import (
 )
 
 func main() {
-	ch := make(chan int)
-
 	var wg sync.WaitGroup
 
-	wg.Add(2)
+	ch := make(chan int)
 
+	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		defer close(ch)
 
 		for i := 0; i < 100; i++ {
 			ch <- i
 		}
+		close(ch)
 	}()
 
 	go func() {
@@ -28,6 +27,5 @@ func main() {
 			fmt.Println("number is", value)
 		}
 	}()
-
 	wg.Wait()
 }

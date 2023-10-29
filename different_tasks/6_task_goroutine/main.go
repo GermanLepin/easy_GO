@@ -16,7 +16,6 @@ func main() {
 	const gs = 100
 
 	wg.Add(gs)
-
 	for i := 0; i < gs; i++ {
 		go func() {
 			mu.Lock()
@@ -31,7 +30,7 @@ func main() {
 			wg.Done()
 		}()
 	}
-
 	wg.Wait()
+
 	fmt.Println("end value:", incrementor)
 }

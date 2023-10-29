@@ -22,23 +22,23 @@ func main() {
 
 func (a *agent) generateRandomNumbers(ch chan<- int) {
 	defer a.wg.Done()
-	defer close(ch)
 
 	for i := 0; i < 10; i++ {
 		num := rand.Intn(1000)
 		ch <- num
 	}
+	close(ch)
 }
 
 func (a *agent) calculateTheSquare(ch1 <-chan int, ch2 chan<- int) {
 	defer a.wg.Done()
-	defer close(ch2)
 
 	for value := range ch1 {
 		i := value * value
 
 		ch2 <- i
 	}
+	close(ch2)
 }
 
 func (a *agent) printTheSquare(ch <-chan int) {

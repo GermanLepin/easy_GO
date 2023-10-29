@@ -27,8 +27,8 @@ func main() {
 			fmt.Println("number is", value)
 		}
 	}()
-
 	wg.Wait()
+
 	fmt.Println("DONE")
 
 	// ********************* easy way ***************************** //

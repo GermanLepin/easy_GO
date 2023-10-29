@@ -13,7 +13,6 @@ func main() {
 	var wg sync.WaitGroup
 
 	wg.Add(2)
-
 	go func() {
 		fmt.Println("hello from thing one")
 		wg.Done()
